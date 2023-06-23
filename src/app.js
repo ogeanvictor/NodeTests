@@ -1,3 +1,5 @@
+require('dotenv/config');
+
 const express = require('express');
 const mongoose = require('mongoose');
 
@@ -7,7 +9,7 @@ app.use(express.json());
 const User = require('./database/user');
 const connection = async () => {
     try {
-        await mongoose.connect('mongodb+srv://geanvictorduque:45229536@cluster0.k8hts9o.mongodb.net/?retryWrites=true&w=majority');
+        await mongoose.connect(process.env.DATABASE_URL);
         console.log('Conexão com o mongo estabelecida')
     } catch (error) {
         console.log(error)
