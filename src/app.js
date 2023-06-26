@@ -3,10 +3,6 @@ require('dotenv/config');
 const express = require('express');
 const mongoose = require('mongoose');
 
-const app = express();
-app.use(express.json());
-
-const User = require('./database/user');
 const connection = async () => {
     try {
         await mongoose.connect(process.env.DATABASE_URL);
@@ -16,10 +12,13 @@ const connection = async () => {
     }
 }
 connection();
+require('./database/user');
+
+const app = express();
+app.use(express.json());
 
 const router = express.Router();
-
-const userRoutes = require('./routes/routes');
+const userRoutes = require('./routes/user');
 app.use('/user', userRoutes);
 
 module.exports = app;

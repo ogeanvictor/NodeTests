@@ -4,7 +4,7 @@ const HttpStatusCodes = require('http-status-codes');
 
 const service = require('../services/user')
 
-exports.save = async (req,res) => {
+exports.save = async (req,res,next) => {
     try {
         let user = await service.save(req.body);
         res.status(HttpStatusCodes.StatusCodes.OK).send(user);
