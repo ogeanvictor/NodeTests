@@ -34,4 +34,9 @@ describe('Test user create route', () => {
 
         expect(userTwo).toHaveProperty('message')
     });
+
+    afterAll(async () => {
+        await mongoose.connection.close();
+        console.log('Conexão com o mongo desligada')
+    });
 })
