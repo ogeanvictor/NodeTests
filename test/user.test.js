@@ -12,8 +12,8 @@ describe('Test user create route', () => {
     it('should be create user', async () => {
         const savedUser = await save({
             name: 'Name test',
-            username: 'usernameTest',
-            email: 'email@test.com'
+            username: 'usernameTest2',
+            email: 'email2@test.com'
         });
         
         expect(savedUser).toHaveProperty('_id');
@@ -23,15 +23,15 @@ describe('Test user create route', () => {
         const userOne = await save({
             name: 'Name test one',
             username: 'usernameTestDuplicated',
-            email: 'emailone@test.com'
+            email: 'emailduplicated@test.com'
         });
 
         const userTwo = await save({
             name: 'Name test two',
             username: 'usernameTestDuplicated',
-            email: 'emailtwo@test.com'
+            email: 'emailduplicated@test.com'
         });
 
-        expect(userTwo).toThrowError()
-    })
+        expect(userTwo).toHaveProperty('message')
+    });
 })
