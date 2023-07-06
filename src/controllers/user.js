@@ -24,7 +24,7 @@ exports.get = async (req, res) => {
 
 exports.getById = async (req, res) => {
     try {
-        let user = await service.getById(req.params);
+        let user = await service.getById(req.params.id);
         res.status(HttpStatusCodes.StatusCodes.OK).send(user);
     } catch (error) {
         res.status(HttpStatusCodes.StatusCodes.BAD_REQUEST).send({"message": error.message});
@@ -42,7 +42,7 @@ exports.update = async (req,res) => {
 
 exports.delete = async (req, res) => {
     try {
-        let user = await service.delete(req.params);
+        let user = await service.delete(req.params.id);
         res.status(HttpStatusCodes.StatusCodes.OK).send(user);
     } catch (error) {
         res.status(HttpStatusCodes.StatusCodes.BAD_REQUEST).send({"message": error.message});
