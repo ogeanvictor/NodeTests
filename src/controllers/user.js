@@ -2,9 +2,9 @@
 
 const HttpStatusCodes = require('http-status-codes');
 
-const service = require('../services/user')
+const service = require('../services/user');
 
-exports.save = async (req,res,next) => {
+exports.save = async (req,res) => {
     try {
         let user = await service.save(req.body);
         res.status(HttpStatusCodes.StatusCodes.OK).send(user);
@@ -15,7 +15,7 @@ exports.save = async (req,res,next) => {
 
 exports.get = async (req, res) => {
     try {
-        let users = await service.get(req.body);
+        let users = await service.get();
         res.status(HttpStatusCodes.StatusCodes.OK).send(users);
     } catch (error) {
         res.status(HttpStatusCodes.StatusCodes.BAD_REQUEST).send({"message": error.message});
@@ -29,7 +29,7 @@ exports.getById = async (req, res) => {
     } catch (error) {
         res.status(HttpStatusCodes.StatusCodes.BAD_REQUEST).send({"message": error.message});
     }
-}
+};
 
 exports.update = async (req,res) => {
     try {
