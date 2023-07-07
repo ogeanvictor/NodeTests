@@ -16,8 +16,8 @@ describe('Test user create route', () => {
     it('should be create user', async () => {
         const savedUser = await save({
             name: 'Name test',
-            username: 'usernameTest26',
-            email: 'email23@test.com'
+            username: 'usernameTest3142256',
+            email: 'email2212231139934@test.com'
         });
         
         expect(savedUser).toHaveProperty('_id');
@@ -49,7 +49,38 @@ describe('Test user create route', () => {
         expect(userTwo).toHaveProperty('message');
     });
 
-    afterAll(async () => {
+    it('should be able to get all users', async () => {
+        const response = await request(app).get('/user/');
+
+        expect(response.status).toBe(200);
+        expect(response.body).not.toBeNull();
+    });
+
+    it('should be able to get user by Id', async () => {
+        const id = '649db730529d18cfa525b9cf';
+        const response = await request(app).get(`/user/${id}`)
+
+        expect(response.status).toBe(200);
+        expect(response.body._id).toEqual(id);
+    });
+
+    it('should be able to update user', async () => {
+        const response = await request(app).put(`/user/`).send({
+            _id: '649db730529d18cfa525b9cf',
+            name: 'Name updated'
+        });
+
+        expect(response.status).toBe(200);
+    });
+
+    it('should be able to delete user', async () => {
+        const id = '64a5dec5159d558cc77900ec';
+        const response = await request(app).delete(`/user/${id}`);
+
+        expect(response.status).toBe(200);
+    });
+
+     afterAll(async () => {
         await mongoose.connection.close();
         console.log('Conexão com o mongo desligada')
     });
