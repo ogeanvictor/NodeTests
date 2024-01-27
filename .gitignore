@@ -17,6 +17,8 @@ test-results.xml
 
 src/tmp_old/
 
+/coverage
+
 scripts/*.json
 
 *.pyc
